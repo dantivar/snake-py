@@ -1,4 +1,4 @@
-from typing import runtime_checkable
+from food import Food
 from snake import Snake
 from turtle import Screen
 
@@ -10,6 +10,7 @@ screen.title("Py Snake Game")
 screen.tracer(0)
 
 snake = Snake()
+food = Food()
   
 screen.onkey(snake.up, "Up")
 screen.onkey(snake.right, "Right")
@@ -18,9 +19,14 @@ screen.onkey(snake.down, "Down")
 screen.listen()
 
 def run_game():
+  # Snake movement
   snake.move()
   screen.update()
-  screen.ontimer(run_game, 250)
+
+  # Detect collition with food
+  if snake.segments[0].distance(food) < 15:
+    food.refresh()
+  screen.ontimer(run_game, 100)
 
 run_game()
 screen.mainloop()

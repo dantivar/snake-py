@@ -1,5 +1,4 @@
 from turtle import Turtle
-import turtle
 
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVEMENT = 20
@@ -17,6 +16,15 @@ class Snake:
       new_segment.goto(position)
       self.segments.append(new_segment)
   
+  def increase_size(self):
+    position_x = self.segments[-1].xcor() - 20
+    position_y = self.segments[-1].ycor() - 20
+    new_segment = Turtle('square')
+    new_segment.color('purple')
+    new_segment.penup()
+    new_segment.goto(position_x, position_y)
+    self.segments.append(new_segment)
+
   def move(self):
     for seg in range(len(self.segments) - 1, 0, -1):
       new_x = self.segments[seg - 1].xcor()
